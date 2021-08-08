@@ -51,5 +51,10 @@ class YouTubeApi():
 			return title
 	
 
-
-# AIzaSyC_viihkRiUg3N5bv0DRvOrmaNdUNJ852U 
+	def DescriptionVideo(self, idVideo: str = None):
+		if self.youtube_api_key is None or self.youtube_api_key == "":
+			logger.error("The API key from the YouTube API is not specified.")
+		else:
+			r = self.service.videos().list(id=idVideo, part='snippet').execute()
+			descVideo = r["items"][0]["snippet"]["description"]
+			return descVideo
